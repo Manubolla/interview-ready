@@ -1,6 +1,11 @@
 import stringRotation from "../../09_stringRotation";
+import { resetIsSubstring } from "../../__utils__/strings";
 
 describe("09 - stringRotation", () => {
+  beforeEach(() => {
+    resetIsSubstring();
+  });
+
   test("rotates a string", () => {
     const str1 = "Hello";
     const str2 = "oHell";
