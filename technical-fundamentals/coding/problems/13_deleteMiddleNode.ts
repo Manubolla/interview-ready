@@ -19,5 +19,21 @@ export type Node<T> = {
 
 export default function deleteMiddleNode<T>(
   head: Node<T>,
-  position: number,
-): Node<T> | undefined {}
+  position: number
+): Node<T> | undefined {
+  if (!position) return head;
+  let dummy = new LinkedList({ value: undefined as T, next: head }).head;
+  let pointer = dummy;
+  let counter = 0;
+
+  while (pointer && pointer.next) {
+    if (counter === position) {
+      pointer.next = pointer.next.next;
+      return dummy?.next;
+    } else {
+      pointer = pointer.next;
+      counter++;
+    }
+  }
+  return dummy?.next;
+}
