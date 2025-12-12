@@ -7,23 +7,19 @@
 // You can assume the string has only uppercase and lowercase letters (a - z).
 
 export default function stringCompression(str: string): string {
-  if (str.length <= 1) return str;
-  let ans: string = "";
-  let char: string = str[0];
-  let count: number = 0;
+  let char = str[1];
+  let count = 1;
+  let compressed = "";
 
-  for (let i = 0; i < str.length; i++) {
+  for (let i = 1; i < str.length; i++) {
     if (char === str[i]) count++;
     else {
-      ans += `${char}${count}`;
+      compressed += `${char}${count}`;
       count = 1;
       char = str[i];
     }
   }
+  compressed += `${char}${count}`;
 
-  if (count > 0) {
-    ans += `${char}${count}`;
-  }
-
-  return ans.length < str.length ? ans : str;
+  return compressed.length < str.length ? compressed : str;
 }

@@ -10,22 +10,21 @@
 // ```
 
 export default function palindromePermutation(str: string): boolean {
-  if (str?.length <= 1) return true;
-
-  let hash: Record<string, number> = {};
+  const count: Record<string, number> = {};
 
   for (let i = 0; i < str.length; i++) {
     const char = str[i].toLowerCase();
-    if (char === " ") continue; // skip spaces
-    if (!hash[char]) hash[char] = 1;
-    else hash[char] = hash[char] + 1;
+
+    if (char === " ") continue;
+
+    count[char] = (count[char] || 0) + 1;
   }
 
-  let oddCount = 0;
-  for (const value of Object.values(hash)) {
-    console.log(value, oddCount);
-    if (value % 2 !== 0) oddCount++;
-  }
+  let odd = 0;
 
-  return oddCount <= 1; // We can have just 1 letter and it will still be a palindrome.
+  for (const value of Object.values(count)) {
+    if (value % 2 !== 0) odd++;
+    if (odd > 1) return false;
+  }
+  return true;
 }

@@ -6,23 +6,16 @@
 type Matrix = number[][];
 
 export default function rotateMatrix(matrix: Matrix) {
-  // [[1,2],[3,4]]
-  // [1,2]
-  // [3,4]
-  // [[1,2,3], [4,5,6], [7,8,9]]
-  // [1,2,3] --> [7,4,1]
-  // [4,5,6] --> [8,5,2]
-  // [7,8,9] --> [9,6,3]
+  let len = matrix.length;
 
-  // Este no logre resolverlo solo u.u
-
-  for (let row = 0; row < matrix.length; row++) {
-    for (let col = row + 1; col < matrix.length; col++) {
+  for (let row = 0; row < len; row++) {
+    for (let col = row + 1; col < len; col++) {
       const temp = matrix[row][col];
       matrix[row][col] = matrix[col][row];
       matrix[col][row] = temp;
     }
   }
+
   matrix.forEach((row) => row.reverse());
   return matrix;
 }

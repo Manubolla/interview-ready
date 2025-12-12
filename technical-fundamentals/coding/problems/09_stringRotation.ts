@@ -7,33 +7,8 @@ import { isSubstring } from "./__utils__/strings";
 // [e.g., "waterbottle" is a rotation of 'erbottlewat")
 
 export default function stringRotation(s1: string, s2: string): boolean {
-  //waterbottle
-  //erbottlewat
+  if (s1.length !== s2.length || s1.length === 0) return false;
 
-  const char = s1[0]; // w
-  let a = 0;
-
-  const sub = isSubstring(s2, s1[0]); // true
-
-  let rotated = "";
-  if (!sub) return false;
-
-  for (let i = 0; i < s2.length; i++) {
-    // erbottlewat
-    // e, r, b, o, t, t, l, e,
-    if (s2[i] !== char) {
-      rotated += s2[i]; // o
-    } else {
-      // i = 8
-      // a = 0, len = 11
-
-      while (a < s2.length - i) {
-        rotated += s1[a];
-        a++;
-      }
-      break;
-    }
-  }
-
-  return s2 === rotated;
+  const combined = s1 + s1;
+  return isSubstring(combined, s2);
 }

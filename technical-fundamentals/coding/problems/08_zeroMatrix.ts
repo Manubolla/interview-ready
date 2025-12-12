@@ -5,37 +5,36 @@
 type Matrix = number[][];
 
 export default function zeroMatrix(matrix: Matrix) {
-  // [[0,2], [3,4]]
-  // [0, 2]
-  // [3, 4]
-  // ->
-  // [0, 0]
-  // [0, 4]
-  // [[1, 2, 3], [4, 5, 6], [7, 0, 9],]
-  // [1, 2, 3],
-  // [4, 5, 6],
-  // [7, 0, 9],
+  let rows = matrix.length;
+  let cols = matrix[0].length;
 
-  // Intente pero tampoco logre hacer este.
-  let array: Array<[number, number]> = [];
+  const zeroRows = Array(rows).fill(false);
+  const zeroCols = Array(cols).fill(false);
 
-  for (let row = 0; row < matrix.length; row++) {
-    for (let col = 0; col < matrix.length; col++) {
-      if (matrix[row][col] === 0) {
-        array.push([row, col]);
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (matrix[r][c] === 0) {
+        zeroRows[r] = true;
+        zeroCols[c] = true;
       }
     }
   }
 
-  array.forEach((coord) => {
-    const [x, y] = coord;
-    matrix[x] = Array(matrix[x].length).fill(0);
-
-    for (let row = 0; row < matrix.length; row++) {
-      matrix[row][y] = 0;
+  for (let r = 0; r < rows; r++) {
+    if (zeroRows[r]) {
+      for (let c = 0; c < rows; c++) {
+        matrix[r][c] = 0;
+      }
     }
-    return matrix;
-  });
+  }
+
+  for (let c = 0; c < cols; c++) {
+    if (zeroCols[c]) {
+      for (let r = 0; r < cols; r++) {
+        matrix[r][c] = 0;
+      }
+    }
+  }
 
   return matrix;
 }
